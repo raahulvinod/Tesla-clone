@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Section from './Section';
+//1.7
 
 const Home = () => {
   return (
