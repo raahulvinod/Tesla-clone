@@ -3,18 +3,26 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
 
+import { selectCars } from '../features/car/carSlice';
+import { useSelector } from 'react-redux';
+
 const Header = () => {
   const [menuClicked, setMenuClicked] = useState(false);
+  const cars = useSelector(selectCars);
   return (
     <Container>
       <a href="#">
         <img src="/images/logo.svg" alt="tesla logo" />
       </a>
       <Menu>
-        <a href="#">Model S</a>
-        <a href="#">Model 3</a>
-        <a href="#">Model X</a>
-        <a href="#">Model Y</a>
+        {cars &&
+          cars.map((car, index) => {
+            return (
+              <a kay={index} href="#">
+                {car}
+              </a>
+            );
+          })}
       </Menu>
       <RightMenu>
         <a href="#">Shop</a>
@@ -25,6 +33,14 @@ const Header = () => {
         <CloseWrapper>
           <CustomClose onClick={() => setMenuClicked(false)} />
         </CloseWrapper>
+        {cars &&
+          cars.map((car, index) => {
+            return (
+              <li>
+                <a href="#">{car}</a>
+              </li>
+            );
+          })}
         <li>
           <a href="#">Existing Inventory</a>{' '}
         </li>
@@ -38,20 +54,9 @@ const Header = () => {
           <a href="#">Demo Drive</a>
         </li>
         <li>
-          <a href="#">Insurance</a>
-        </li>
-        <li>
-          <a href="#">Fleet</a>
-        </li>
-        <li>
           <a href="#">Commercial Energy</a>
         </li>
-        <li>
-          <a href="#">Utilities</a>
-        </li>
-        <li>
-          <a href="#">Charging</a>
-        </li>
+
         <li>
           <a href="#">Careers</a>
         </li>
